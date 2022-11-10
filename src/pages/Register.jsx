@@ -1,29 +1,25 @@
-import React from 'react';
-import { Container, Card, Form, Button } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
+import Sign from './Sign';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/slices/userSlice';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  return (
-    <Container
-      style={{
-        height: window.innerHeight,
-      }}
-      className="h-full d-flex flex-column justify-content-center align-items-center">
-      <Card style={{ width: 600 }} className="p-5">
-        <h2 className="mx-auto">ChatME</h2>
-        <Form className="d-flex flex-column">
-          <Form.Control className="mt-3" placeholder="Enter email" type="email" />
-          <Form.Control className="mt-3" placeholder="Password" type="password" />
-          <div className="d-flex justify-content-between align-items-center mt-3 pl-3 pr-3">
-            <div>
-              Have an account? <NavLink to="/login">Login!</NavLink>
-            </div>
-            <Button variant="outline-dark">REGISTER</Button>
-          </div>
-        </Form>
-      </Card>
-    </Container>
-  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleReg = (email, password) => {
+    const auth = getAuth();
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        dispatch(setUser({ email: user.email, userId: user.uid, token: user.accessToken }));
+        navigate('/chat');
+      })
+      .catch(console.error);
+  };
+
+  return <Sign title={'REG'} handleClick={handleReg} />;
 };
 
 export default Register;
