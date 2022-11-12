@@ -1,0 +1,11 @@
+#root {
+  background-color: #fecaca;
+}
+
+.addAvatar {
+  cursor: pointer;
+}
+
+.addAvatar > img {
+  width: 40px;
+}
