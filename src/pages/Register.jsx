@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux';
-import { setUser } from '../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { auth, storage, db } from '../firebase';
 import React, { useState } from 'react';
@@ -9,10 +7,12 @@ import addAvatar from '../assets/images/add-avatar.png';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc } from 'firebase/firestore';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/slices/userSlice';
 
 const Register = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -24,41 +24,45 @@ const Register = () => {
 
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
-      const storageRef = ref(storage, 'avatars/' + displayName);
-      const task = uploadBytesResumable(storageRef, file);
+      const storageRef = ref(storage, `avatars/${Date.now() + displayName}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-      task.on(
+      uploadTask.on(
         'state_changed',
-        (snap) => {},
+        () => {},
         (error) => {
           setError(true);
         },
         () => {
-          getDownloadURL(task.snapshot.ref).then(async (downloadURL) => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateProfile(user, {
               displayName: displayName,
               photoURL: downloadURL,
             });
 
             await setDoc(doc(db, 'users', user.uid), {
-              userId: user.uid,
+              uid: user.uid,
               displayName,
               email,
               photoURL: downloadURL,
             });
+
+            await setDoc(doc(db, 'userChats', user.uid), {});
+
+            dispatch(
+              setUser({
+                userLogged: !!user.email,
+                displayName: user.displayName,
+                uid: user.uid,
+                email: user.email,
+                accessToken: user.accessToken,
+                photoURL: user.photoURL,
+              }),
+            );
+            navigate('/');
           });
         },
       );
-
-      // dispatch(
-      //   setUser({
-      //     email: user.email,
-      //     userId: user.uid,
-      //     token: user.accessToken,
-      //     nickName: user.displayName,
-      //   }),
-      // );
-      navigate('/chat');
     } catch (error) {
       console.log(error);
       setError(true);
@@ -73,7 +77,7 @@ const Register = () => {
       className="h-full d-flex flex-column justify-content-center align-items-center">
       <Card style={{ minWidth: 325 }} className="p-3">
         <h2 className="mx-auto">ChatME</h2>
-        <p className="mx-auto">Login</p>
+        <p className="mx-auto">Sign Up</p>
         <Form onSubmit={handleSubmit} className="d-flex gap-3 flex-column">
           <Form.Control className="" placeholder="Nickname" type="text" />
           <Form.Control className="" placeholder="Enter email" type="email" />
@@ -84,11 +88,11 @@ const Register = () => {
             <p className="mb-0">Add an avatar</p>
           </Form.Label>
           <Button type="submit" variant="outline-dark">
-            Registration
+            Sign Up
           </Button>
           {error && <span className="align-self-center">Opps... Something wrong :(</span>}
           <p className="align-self-center">
-            Have an account? <Link to="/login">Login!</Link>
+            Have an account? <Link to="/login">Sign In!</Link>
           </p>
         </Form>
       </Card>

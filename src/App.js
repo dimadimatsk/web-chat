@@ -1,18 +1,34 @@
-import { Routes, Route } from 'react-router-dom';
-import { useIsAuth } from './hooks/useIsAuth';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
 function App() {
-  const { isAuth, email } = useIsAuth();
+  const isLogged = useSelector((state) => state.user.userLogged);
+  const [logged, setLogged] = useState(false);
+
+  const ProtectedRoute = ({ children }) => {
+    return isLogged ? children : <Navigate to="/login" />;
+  };
+
+  useEffect(() => {
+    setLogged(isLogged);
+  }, [isLogged]);
 
   return (
     <Routes>
-      <Route path="/chat" element={isAuth ? <Chat email={email} /> : <>МИМО</>} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="*" element={isAuth ? <Chat email={email} /> : <Login />} />
+      <Route
+        index
+        element={
+          <ProtectedRoute>
+            <Chat />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/login" element={isLogged ? <Navigate to={'/'} /> : <Login />} />
+      <Route path="/register" element={isLogged ? <Navigate to={'/'} /> : <Register />} />
     </Routes>
   );
 }

@@ -1,16 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import { logoutUser } from '../redux/slices/userSlice';
 
-const Chat = ({ email }) => {
+const Chat = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logOut = () => {
+    signOut(auth);
     dispatch(logoutUser());
-    navigate('/');
+    navigate('/login');
   };
-  return <button onClick={logOut}>{email}</button>;
+  return <button onClick={logOut}>QUIT</button>;
 };
 
 export default Chat;

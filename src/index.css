@@ -2,6 +2,10 @@
   background-color: #fecaca;
 }
 
+body.pending {
+  visibility: hidden;
+}
+
 .addAvatar {
   cursor: pointer;
 }
