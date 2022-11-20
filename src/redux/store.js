@@ -11,14 +11,17 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import chatSlice from './slices/chatSlice';
 
 const rootReducer = combineReducers({
   user: userSlice,
+  chats: chatSlice,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['chats'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

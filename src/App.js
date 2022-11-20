@@ -1,20 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Chat from './pages/Chat';
+import Main from './pages/Main';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
 function App() {
   const isLogged = useSelector((state) => state.user.userLogged);
-  const [logged, setLogged] = useState(false);
+  // const [logged, setLogged] = useState(false);
 
   const ProtectedRoute = ({ children }) => {
     return isLogged ? children : <Navigate to="/login" />;
   };
 
   useEffect(() => {
-    setLogged(isLogged);
+    // setLogged(isLogged);
   }, [isLogged]);
 
   return (
@@ -23,7 +23,7 @@ function App() {
         index
         element={
           <ProtectedRoute>
-            <Chat />
+            <Main />
           </ProtectedRoute>
         }
       />

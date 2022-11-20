@@ -1,0 +1,40 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #00378a;
+  height: 50px;
+  padding: 10px;
+  color: #fff;
+}
+
+.logo {
+  font-weight: bold;
+}
+
+.user {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #fff;
+  object-fit: cover;
+}
+
+.logout {
+  cursor: pointer;
+  font-size: 10px;
+  color: #fff;
+  border: none;
+  background-color: #0056d6;
+}
+
+.logout:hover {
+  background-color: #004cbd;
+}
