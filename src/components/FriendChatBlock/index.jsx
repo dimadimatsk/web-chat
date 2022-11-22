@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { db } from '../../firebase';
 import Message from '../MessageBlock';
-import styles from './FriendChatBlock.module.css';
+import styles from './FriendChatBlock.module.scss';
 
 const FriendChatBlock = () => {
   const [messages, setMessages] = useState([]);

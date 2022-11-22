@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './InputAreaBlock.module.css';
+import styles from './InputAreaBlock.module.scss';
 import addImgIcon from '../../assets/images/addimg.svg';
 import { useSelector } from 'react-redux';
 import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc } from 'firebase/firestore';
@@ -102,7 +102,7 @@ const InputAreaBlock = () => {
               onChange={(e) => setImg(e.target.files[0])}
             />
             <label style={{ display: 'flex' }} htmlFor="chatFile">
-              <img className={styles.icon} src={addImgIcon} alt="add photo" />
+              <img className={styles.icon} src={addImgIcon} alt="addphoto" />
             </label>
             <button onClick={(e) => handleSend(e)} className={styles.sendBtn}>
               send

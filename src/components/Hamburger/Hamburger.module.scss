@@ -1,0 +1,30 @@
+.hamburger {
+  display: flex;
+  width: 2rem;
+  height: 1.5rem;
+  justify-content: space-around;
+  flex-flow: column nowrap;
+  z-index: 10;
+  cursor: pointer;
+
+  .burger {
+    width: 1.5rem;
+    height: 0.15rem;
+    border-radius: 10px;
+    background-color: #fff;
+    transform-origin: 1px;
+    transition: all 0.2s linear;
+  }
+}
+
+@media (min-width: 320px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+}

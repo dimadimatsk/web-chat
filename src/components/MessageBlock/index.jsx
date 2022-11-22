@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import styles from './MessageBlock.module.css';
+import styles from './MessageBlock.module.scss';
 import { useSelector } from 'react-redux';
 
 const MessageBlock = ({ message }) => {

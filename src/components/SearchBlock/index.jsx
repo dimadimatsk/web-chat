@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import styles from './SearchBlock.module.css';
+import React, { useState, useRef } from 'react';
+import styles from './SearchBlock.module.scss';
 import {
   collection,
   query,
@@ -10,13 +10,12 @@ import {
   updateDoc,
   serverTimestamp,
   getDoc,
-  onSnapshot,
 } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { setChat } from '../../redux/slices/chatSlice';
 
-const SearchBlock = () => {
+const SearchBlock = ({ toggle }) => {
   const [searchUserName, setSearchUserName] = useState('');
   const [user, setUser] = useState(null);
   const [error, setError] = useState(false);
@@ -58,7 +57,6 @@ const SearchBlock = () => {
 
     try {
       const response = await getDoc(doc(db, 'chats', chatId));
-      console.log(response);
 
       if (!response.exists()) {
         await setDoc(doc(db, 'chats', chatId), { messages: [] });
@@ -86,6 +84,7 @@ const SearchBlock = () => {
     }
     setUser(null);
     setSearchUserName('');
+    toggle();
   };
 
   return (

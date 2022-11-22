@@ -7,14 +7,12 @@ import Register from './pages/Register';
 
 function App() {
   const isLogged = useSelector((state) => state.user.userLogged);
-  // const [logged, setLogged] = useState(false);
 
   const ProtectedRoute = ({ children }) => {
     return isLogged ? children : <Navigate to="/login" />;
   };
 
   useEffect(() => {
-    // setLogged(isLogged);
   }, [isLogged]);
 
   return (

@@ -1,0 +1,91 @@
+#root {
+  background-color: #0d6efd;
+}
+
+.addAvatar {
+  cursor: pointer;
+}
+
+.addAvatar > img {
+  width: 40px;
+}
+
+.wrapper {
+  width: 80%;
+  height: 85%;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.aside {
+  flex: 1;
+  background-color: #0056d6;
+  max-width: 300px;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+}
+
+.chat {
+  flex: 2;
+}
+
+.chatInfo {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  background-color: #0e63e3;
+  padding: 10px;
+  color: lightgray;
+}
+
+.overlay {
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  right: 0;
+  background: rgb(41, 41, 41);
+  opacity: 0;
+  transition: all 0.3s ease-in;
+}
+
+.active {
+  visibility: visible;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+}
+
+@media (min-width: 320px) {
+  .aside {
+    position: absolute;
+    width: 65%;
+    height: 100%;
+  }
+
+  .chat {
+    .chatInfo {
+      justify-content: space-between;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .aside {
+    display: block;
+    flex: 1 1;
+    max-width: 200px;
+    position: relative;
+  }
+  .chat {
+    .chatInfo {
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .aside {
+    max-width: 250px;
+  }
+}

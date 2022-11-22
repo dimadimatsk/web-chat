@@ -42,7 +42,7 @@ const Login = () => {
         height: '100vh',
       }}
       className="h-full d-flex flex-column justify-content-center align-items-center">
-      <Card style={{ minWidth: 325 }} className="p-3">
+      <Card style={{ minWidth: '320px' }} className="p-3">
         <h2 className="mx-auto">ChatME</h2>
         <p className="mx-auto">Sign In</p>
         <Form onSubmit={handleSubmit} className="d-flex gap-3 flex-column">
