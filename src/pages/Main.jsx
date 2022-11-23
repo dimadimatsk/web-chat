@@ -40,18 +40,14 @@ const Main = () => {
   }, []);
 
   return (
-    <Container
-      style={{ height: '100vh' }}
-      className="bg-primary d-flex flex-column justify-content-center align-items-center">
-      <div className="wrapper d-flex flex-row position-relative">
-        <div
-          ref={ref}
-          onClick={toggleHamburger}
-          className={`overlay${isOpen && width < 768 ? ' active' : ''}`}></div>
-        <Aside isOpen={isOpen} width={width} toggle={toggleHamburger} />
-        <Chat isOpen={isOpen} toggle={toggleHamburger} />
-      </div>
-    </Container>
+    <div className="wrapper d-flex flex-row position-relative">
+      <div
+        ref={ref}
+        onClick={toggleHamburger}
+        className={`overlay${isOpen && width < 768 ? ' active' : ''}`}></div>
+      <Aside isOpen={isOpen} width={width} toggle={toggleHamburger} />
+      <Chat isOpen={isOpen} toggle={toggleHamburger} />
+    </div>
   );
 };
 
