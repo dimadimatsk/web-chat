@@ -89,7 +89,7 @@ const InputAreaBlock = () => {
           <input
             className={styles.inputText}
             type="text"
-            placeholder="test"
+            placeholder=""
             value={text}
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => handleSend(e)}

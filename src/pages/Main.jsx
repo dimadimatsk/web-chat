@@ -24,6 +24,21 @@ const Main = () => {
     };
   }, []);
 
+  const getWidth = () =>
+    window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  let [width, setWidth] = useState(getWidth());
+
+  useEffect(() => {
+    const resizeListener = () => {
+      setWidth(getWidth());
+    };
+
+    window.addEventListener('resize', resizeListener);
+    return () => {
+      window.removeEventListener('resize', resizeListener);
+    };
+  }, []);
+
   return (
     <Container
       style={{ height: '100vh' }}
@@ -32,8 +47,8 @@ const Main = () => {
         <div
           ref={ref}
           onClick={toggleHamburger}
-          className={`overlay${isOpen ? ' active' : ''}`}></div>
-        <Aside isOpen={isOpen} toggle={toggleHamburger} />
+          className={`overlay${isOpen && width < 768 ? ' active' : ''}`}></div>
+        <Aside isOpen={isOpen} width={width} toggle={toggleHamburger} />
         <Chat isOpen={isOpen} toggle={toggleHamburger} />
       </div>
     </Container>
