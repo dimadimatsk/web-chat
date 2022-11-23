@@ -60,6 +60,13 @@
   border-radius: 10px 0px 10px 10px;
 }
 
+.close {
+  width: 13px;
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+}
+
 @media (max-width: 992px) {
   .text {
     font-size: 14px;
