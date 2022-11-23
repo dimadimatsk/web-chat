@@ -93,7 +93,7 @@ const SearchBlock = ({ toggle }) => {
         ref={inputRef}
         placeholder="Search your conversation..."
         value={searchUserName}
-        onKeyDown={handleKeyDown}
+        onKeyPress={handleKeyDown}
         onChange={(e) => setSearchUserName(e.target.value)}
         className={styles.input}
         type="search"
