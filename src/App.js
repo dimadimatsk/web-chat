@@ -18,7 +18,7 @@ function App() {
 
   return (
     <Container
-      style={{ height: '100vh' }}
+      style={{ height: '100%' }}
       className="bg-primary d-flex flex-column justify-content-center align-items-center">
       <Routes>
         <Route
