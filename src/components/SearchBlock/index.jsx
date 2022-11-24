@@ -48,7 +48,9 @@ const SearchBlock = ({ toggle }) => {
   };
 
   const handleKeyDown = (e) => {
-    e.code === 'Enter' && handleSearch();
+    console.log(e);
+    e.keyCode === 13 && handleSearch();
+    e.keyCode === 13 && inputRef.current.blur();
   };
 
   const handleSelect = async () => {
@@ -93,10 +95,10 @@ const SearchBlock = ({ toggle }) => {
         ref={inputRef}
         placeholder="Search your conversation..."
         value={searchUserName}
-        onKeyPress={handleKeyDown}
+        onKeyDown={handleKeyDown}
         onChange={(e) => setSearchUserName(e.target.value)}
         className={styles.input}
-        type="search"
+        type="text"
       />
       {searchUserName && (
         <svg

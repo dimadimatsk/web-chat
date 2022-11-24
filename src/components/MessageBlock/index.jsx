@@ -55,10 +55,10 @@ const MessageBlock = ({ message }) => {
       <Modal
         onHide={handleClose}
         show={showModal}
-        size="lg"
+        size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered>
-        <Modal.Body style={{ position: 'relative' }}>
+        <Modal.Body style={{ position: 'relative', paddingTop: '30px' }}>
           <svg
             className={styles.close}
             onClick={handleClose}
