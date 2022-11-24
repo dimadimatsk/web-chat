@@ -58,7 +58,7 @@ const MessageBlock = ({ message }) => {
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered>
-        <Modal.Body style={{ position: 'relative', paddingTop: '30px', height: '80vh' }}>
+        <Modal.Body style={{ position: 'relative', paddingTop: '30px', maxHeight: '80vh' }}>
           <svg
             className={styles.close}
             onClick={handleClose}
@@ -71,7 +71,7 @@ const MessageBlock = ({ message }) => {
             />
           </svg>
           <img
-            style={{ width: '-webkit-fill-available', height: 'calc(80vh - 45px)' }}
+            style={{ width: '-webkit-fill-available', maxHeight: 'calc(80vh - 45px)' }}
             onClick={handleShow}
             className={styles.sendImg}
             src={message.img}
